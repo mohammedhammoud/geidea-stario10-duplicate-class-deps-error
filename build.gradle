@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+buildscript {
+    ext {
+        buildToolsVersion = "30.0.2"
+        minSdkVersion = 23
+        compileSdkVersion = 30
+        targetSdkVersion = 30
+        ndkVersion = "21.4.7075529"
+        androidXVersion = "1.+"
+        androidXCore = "1.0.2"
+    }
+    repositories {
+        jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        google()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:4.2.2")
+    }
+}
+
+dependencies {
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation "net.geidea.sdk:pos-comm-sdk:1.2.2"
+    implementation 'com.starmicronics:stario10:1.0.0'
+}
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    ndkVersion rootProject.ext.ndkVersion
+
+    defaultConfig {
+        applicationId "io.minimum"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+        multiDexEnabled true
+    }
+}
+
+repositories {
+    jcenter()
+    maven(){
+        url = uri("https://geidea.jfrog.io/artifactory/geidea-pos-comm-sdk")
+    }
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
+}
